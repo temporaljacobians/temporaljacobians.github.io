@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temporal Residual Jacobians for Rig-free Motion Transfer</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <!-- <script src="./static/js/bulma-carousel.min.js"></script> -->
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+    /* Increase width by 30% for is-max-desktop */
+    .container.is-max-desktop {
+      max-width: 85%; /* Increase width by 30% */
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered is-gapless">
+        <div class="column has-text-centered">
+            <br><br>
+          <h1 class="title is-1 publication-title">Temporal Residual Jacobians for Rig-free Motion Transfer</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://keunhong.com">Sanjeev Muralikrishnan</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Niladri Shekhar Dutt</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Siddhartha Chaudhuri</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Noam Aigerman</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Vladimir Kim</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Matthew Fisher</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Niloy Mitra</a><sup>1,3</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University College London</span>
+            <span class="author-block"><sup>2</sup>Ready Player Me</span>
+            <span class="author-block"><sup>3</sup>Adobe Research</span>
+            <span class="author-block"><sup>4</sup>University of Montreal</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Coming soon</span>
+                  </a>
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered is-gapless has-text-centered">
+      <div class="column is-four-fifths">
+        <section class="hero teaser">
+            <div class="container is-max-desktop">
+                <div class="hero-body">
+                    <img src="static/images/teaser.png" class="center" />
+                </div>
+            </div>
+        </section>
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce Temporal Residual Jacobians as a novel representation to enable data-driven motion transfer. 
+            Our approach does not assume access to any rigging or intermediate shape keyframes, produces geometrically and temporally consistent motions, and can be used to transfer long motion sequences. Central to our approach are two dedicated neural networks that individually predict the local geometric and temporal changes that are subsequently integrated, spatially and temporally, to produce the final animated meshes. The two networks are jointly trained, complement each other in producing spatial and temporal signals, and are supervised directly with 3D positional information. During inference, in the absence of keyframes, our method essentially solves a motion extrapolation problem.
+            We test our setup on diverse meshes (synthetic and scanned shapes) to demonstrate its effectiveness in generating realistic and natural-looking animations on unseen body shapes. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+  <section class="section">
+      <div class="container is-max-desktop">
+          <!-- Sanity Test. -->
+          <div class="columns is-centered is-gapless">
+              <div class="column is-full-width">
+                  <h2 class="title is-3">Motion sequences</h2>
+                    <p>We showcase our method on a wide variety of sequences from AMASS and humanoid meshes with significantly different shape and topology. All results show transferred motion to an unseen shape without rigging. </p>
+                    <br>
+                  <h3 class="title is-4">Running (in-place)</h3>
+                  <p>Number of frames: 278</p>
+                  <div class="content has-text-justified">
+                      <div class="columns is-full-width is-gapless">
+                          <div class="column is-centered">
+                            <p><center>woman</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/running/running_woman.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>holey man</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/running/running_holey_man.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>alien</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/running/running_green_monster.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <!-- <div class="column is-centered">
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_bunny.mp4" type="video/mp4">
+                            </video>
+                        </div> -->
+                      </div>
+                  </div>
+                  <h3 class="title is-4">Punching</h3>
+                  <p>Number of frames: 187</p>
+                  <div class="content has-text-justified">
+                      <div class="columns is-full-width is-gapless">
+                          <div class="column is-centered">
+                            <p><center>superhero</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/punching/punching_jared.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>holey man</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/punching/punching_holey_man.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>alien</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/punching/punching_green_monster.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <!-- <div class="column is-centered">
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/punching/punching_cyclops.mp4" type="video/mp4">
+                            </video>
+                        </div> -->
+                      </div>
+                  </div>
+                  <h3 class="title is-4">Jumping jacks</h3>
+                  <p>Number of frames: 460</p>
+                  <p>Notice secondary motion on the chubby man around the chest and belly regions.</p>
+                  <div class="content has-text-justified">
+                      <div class="columns is-full-width is-gapless">
+                          <div class="column is-centered">
+                            <p><center>chubby man</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/jumping/jumping_jacks_human.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>superhero</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/jumping/jumping_jacks_jared_v1.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>cyclops</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/jumping/jumping_jacks_cyclops.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <!-- <div class="column is-centered">
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/jumping/jumping_jacks_octoman.mp4" type="video/mp4">
+                            </video>
+                        </div> -->
+                      </div>
+                  </div>
+                  <h3 class="title is-4">Walking</h3>
+                  <p>Number of frames: 1845</p>
+                  <div class="content has-text-justified">
+                      <div class="columns is-full-width is-gapless">
+                          <div class="column is-centered">
+                            <p><center>holey man</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/walking/walking_holey_man.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>superhero</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/walking/walking_jared.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>skeleton zombie</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/walking/walking_skeletonzombie.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                      </div>
+                  </div>
+                  <h3 class="title is-4">Dancing</h3>
+                  <p>Number of frames: 1088</p>
+                  <div class="content has-text-justified">
+                      <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>original capture (unsynchronized)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/dancing/dance.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                          <div class="column is-centered">
+                            <p><center>skeleton zombie</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                  <source src="./static/video/dancing/dance_skeleton.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          <div class="column is-centered">
+                            <p><center>maynard</center></p>
+                              <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/dancing/dance_maynard.mp4" type="video/mp4">
+                              </video>
+                          </div>
+                          
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          <!--/ Sanity Test. -->
+
+          <div class="columns is-centered is-gapless">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Generalization beyond humanoids</h2>
+                <p>Temporal Residual Jacobians generalizes to scans (FAUST) and in the wild meshes (Mixamo).</p>
+                <br>
+                <!-- <h3 class="title is-4">FAUST scans [2]</h3> -->
+                <div class="content has-text-justified">
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>FAUST scan (running)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_scan.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>FAUST scan (punching)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/punching/punching_scan.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Mixamo skeleton zombie (running)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_skeletonzombie.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Mixamo skeleton zombie (punching)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/punching/punching_skeletonzombie.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="columns is-centered is-gapless">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Motion transfer from human to animal</h2>
+                <p>Temporal Residual Jacobians can generalize motion transfer to animals even when it's trained only on humans.</p>
+                <br>
+                <!-- <h3 class="title is-4">FAUST scans [2]</h3> -->
+                <div class="content has-text-justified">
+                    <div class="columns is-full-width">
+                        <div class="column is-centered">
+                            <p><center>Source</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/crop_source.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (reptile)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/reptile.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="columns is-centered is-gapless">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Motion transfer on animals</h2>
+                <h3 class="title is-4">DeformingThings4D</h3>
+                <p>DeformingThings4D is a synthetic dataset of animations including animals. </p>
+                <div class="content has-text-justified">
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Source (bear)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_bear_attack_ply.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (triceraptor)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_bear_attack_triceratop_bear.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (wolf)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_bear_attack_wolf_bear.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Source (dog)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_doggie_jumprun_ply.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (triceratop)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_doggie_jumprun_triceratop_dog.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (wolf)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/d4d/d4d_doggie_jumprun_wolf_d4d_dog.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="title is-4">COP3D: Common Pets in 3D</h3>
+                <p>COP3D dataset contains in the wild animal reconstructions from consumer devices.</p>
+                <div class="content has-text-justified">
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Original capture</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/dog/dog.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Source (dog)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/dog/dog_motion_dog0_dog0.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (wolf)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/dog/dog_motion_dog0_wolf_dog0.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (reptile) </center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/dog/dog_motion_dog0_reptile_dog0.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Target (triceratop)</center></p>
+                          <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/dog/dog_motion_dog0_triceratop_dog0.mp4" type="video/mp4">
+                          </video>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+          <!-- Comparison. -->
+          <div class="columns is-centered is-gapless">
+              <div class="column is-full-width">
+                  <h2 class="title is-3">Comparison</h2>
+                <div class="content has-text-justified">
+                    <h3 class="title is-4">Running</h3>
+                    <p>In comparison to ours, NJF has jitters and artefacts especially at later time steps.</p>
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Vertex ODE (holey man)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/ve/ve_running_50022_holey_man.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>NJF (holey man)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/njf/crop_njf_running_50022_holey_man.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Ours (holey man)</center></p>
+                          <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/ours_comp/crop_running_holey_man.mp4" type="video/mp4">
+                          </video>
+                      </div>
+                    </div>
+                    <div class="columns is-full-width is-gapless">
+                        <!-- <div class="column is-centered">
+                            <p><center>Vertex ODE</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_woman.mp4" type="video/mp4">
+                            </video>
+                        </div> -->
+                        <div class="column is-centered">
+                            <p><center>Vertex ODE (scan)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/ve/ve_running_50022_scan.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>NJF (scan)</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/njf/crop_njf_running_50022_scan.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Ours (scan)</center></p>
+                          <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/ours_comp/crop_running_scan.mp4" type="video/mp4">
+                          </video>
+                      </div>
+                    </div>
+                </div>
+                <!-- <div class="content has-text-justified">
+                    <h3 class="title is-4">Jumping</h3>
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Vertex ODE</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_woman.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>NJF</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/njf/crop_njf_jumping_jacks_50002_cyclops.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Ours</center></p>
+                          <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/ours_comp/crop_jumping_jacks_cyclops.mp4" type="video/mp4">
+                          </video>
+                      </div>
+                    </div>
+                    <div class="columns is-full-width is-gapless">
+                        <div class="column is-centered">
+                            <p><center>Vertex ODE</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/running/running_woman.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>NJF</center></p>
+                            <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                                <source src="./static/video/njf/crop_njf_jumping_jacks_50002_jared_v1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-centered">
+                            <p><center>Ours</center></p>
+                          <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                              <source src="./static/video/ours_comp/crop_jumping_jacks_jared_v1.mp4" type="video/mp4">
+                          </video>
+                      </div>
+                    </div>
+                </div> -->
+          </div>
+          <!--/ Comparison. -->
+
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+            <h2 class="title is-3">Limitations</h2>
+            <p> We do not impose physics constraints, therefore, our animation
+                can have self-intersections. An interesting direction is to incorporate constraints for collision detection.</p>
+          <div class="content has-text-justified">
+              <div class="columns">
+                  <div class="column is-centered">
+                      <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                          <source src="./static/video/jumping/jumping_jacks_octoman.mp4" type="video/mp4">
+                      </video>
+                  </div>
+                  <div class="column is-centered">
+                    <video autoplay controls muted loop disablepictureinpicture controlslist="nodownload" playsinline>
+                        <source src="./static/video/punching/punching_cyclops.mp4" type="video/mp4">
+                    </video>
+                    </div>
+              </div>
+            </div>
+        </div>
+        </div>
+
+      <!-- <div class="container is-max-desktop">
+        <h2 class="title is-3">References</h2>
+            <br>
+            [1] Mahmood, Naureen, et al. "AMASS: Archive of motion capture as surface shapes." Proceedings of the IEEE/CVF international conference on computer vision. 2019.
+            <br>
+            [2] Bogo, Federica, et al. "FAUST: Dataset and evaluation for 3D mesh registration." Proceedings of the IEEE conference on computer vision and pattern recognition. 2014. 
+            <br>
+            [3] Mixamo. <a href="https://www.mixamo.com/" target="_blank">https://www.mixamo.com/</a>
+            <br>
+            [4] Li, Yang, et al. "4dcomplete: Non-rigid motion estimation beyond the observable surface." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2021. 
+            <br>
+            [5] Sinha, Samarth, et al. "Common pets in 3d: Dynamic new-view synthesis of real-life deformable categories." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2023.<br>
+
+            <br>
+            <pre><code>
+        
+          </code></pre> 
+        </div> -->
+
+        <div class="container is-max-desktop">
+        <h2 class="title is-3">BibTeX</h2>
+            <pre><code>
+        
+          </code></pre> 
+        </div>
+        
+  </section>
+
+</body>
+</html>
